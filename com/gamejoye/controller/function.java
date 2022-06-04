@@ -2,6 +2,7 @@ package com.gamejoye.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.gamejoye.pojo.Blog;
+import com.gamejoye.pojo.User;
 import com.gamejoye.service.Service;
 import com.gamejoye.service.UserService;
 import org.springframework.context.ApplicationContext;
@@ -38,6 +39,31 @@ public class function {
             usernameCookie.setMaxAge(60*60);
             usernameCookie.setPath("/");
             response.addCookie(usernameCookie);
+            return "success";
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", maxAge = 3600)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @ResponseBody
+    public String register(@RequestBody Map<String,String> map, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        String username = map.get("username");
+        String password = map.get("password");
+        ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService)app.getBean("userService");
+        boolean isExist = userService.register(username);
+        if(isExist) {
+            //存在用户，无法注册，返回错误标识
+            return "failed";
+        } else {
+            //不存在用户，可以注册
+            //1。添加cookie
+            Cookie usernameCookie = new Cookie("username",username);
+            usernameCookie.setMaxAge(60*60);
+            usernameCookie.setPath("/");
+            response.addCookie(usernameCookie);
+            //2。将用户添加进数据库
+            userService.add(new User(username,password));
             return "success";
         }
     }

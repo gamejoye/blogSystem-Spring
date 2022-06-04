@@ -42,7 +42,7 @@ public class UserService {
         UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
         User u = new User();
         u = UsersMapper.register(name);
-        return  u==null;
+        return  !(u==null);
     }
 
     public void add(User user){
