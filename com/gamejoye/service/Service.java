@@ -37,9 +37,9 @@ public class Service {
         sqlSession.close();
     }
 
-    public Blog selectByid(int id){
+    public Blog selectByArticlename(String article_name){
         Blog blog = new Blog();
-        blog = blogInfoMapper.selectByid(id);
+        blog = blogInfoMapper.selectByArticlename(article_name);
         return blog;
     }
 

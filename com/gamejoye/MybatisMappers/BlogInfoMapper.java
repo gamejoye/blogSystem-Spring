@@ -9,7 +9,7 @@ public interface BlogInfoMapper {
 
     List<Blog> selectAll();
     void add(Blog blog);
-    Blog selectByid(Integer id);
+    Blog selectByArticlename(String article_name);
     void update(Blog blog);
     void delete(int id);
 

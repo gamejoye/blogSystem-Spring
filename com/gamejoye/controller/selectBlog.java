@@ -30,18 +30,25 @@ public class selectBlog {
         return json;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true",maxAge = 3600)
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @RequestMapping(value="/byName")
     @ResponseBody
     public String selectBlogByName(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         Service service = (Service)app.getBean("service");
         List<Blog> blogList = service.selectAllbyName(username);
-        Cookie[] cookies = request.getCookies();
-        for(Cookie cookie : cookies) {
-            System.out.println(cookie.getName()+"="+cookie.getValue());
-        }
         String json = JSON.toJSONString(blogList);
+        return json;
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value="/article_name")
+    @ResponseBody
+    public String selectBlogByArticle_name(String article_name,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Service service = (Service)app.getBean("service");
+        Blog blog = service.selectByArticlename(article_name);
+        String json = JSON.toJSONString(blog);
         return json;
     }
 
