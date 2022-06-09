@@ -52,4 +52,24 @@ public class selectBlog {
         return json;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value="/add")
+    @ResponseBody
+    public String addBlog(@RequestBody Map<String,String> map,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+        String article_name = map.get("article_name");
+        String username = map.get("username");
+        String content = map.get("content");
+        int ordered = Integer.parseInt(map.get("ordered"));
+        Service service = (Service)app.getBean("service");
+        boolean isExist = service.selectByArticlename(article_name) != null;
+        if(isExist) {
+            return "This blog already exists, please change it to a new blog name";
+        } else {
+            Blog blog = new Blog(article_name,username,content,ordered);
+            service.add(blog);
+            return "successfully added";
+        }
+    }
+
 }

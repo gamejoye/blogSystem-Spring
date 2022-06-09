@@ -12,6 +12,13 @@ public class Blog {
 
     }
 
+    public Blog(String article_name,String username,String content,int ordered){
+        this.article_name = article_name;
+        this.username = username;
+        this.content = content;
+        this.ordered = ordered;
+    }
+
 
     public int getId() {
         return id;

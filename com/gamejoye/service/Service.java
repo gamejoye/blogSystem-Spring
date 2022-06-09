@@ -38,7 +38,7 @@ public class Service {
     }
 
     public Blog selectByArticlename(String article_name){
-        Blog blog = new Blog();
+        Blog blog = null;
         blog = blogInfoMapper.selectByArticlename(article_name);
         return blog;
     }
