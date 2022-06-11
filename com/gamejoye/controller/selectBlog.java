@@ -36,6 +36,7 @@ public class selectBlog {
     public String selectBlogByName(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         Service service = (Service)app.getBean("service");
+        if(username.equals("")){return "not login";}
         List<Blog> blogList = service.selectAllbyName(username);
         String json = JSON.toJSONString(blogList);
         return json;
