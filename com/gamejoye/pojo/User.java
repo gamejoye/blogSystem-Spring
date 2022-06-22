@@ -2,9 +2,12 @@ package com.gamejoye.pojo;
 
 public class User {
 
+
+    final int IsAdmin_Default = 0;
     int id;
     String name;
     String password;
+    int is_Admin = IsAdmin_Default;
 
     public User(){
 
@@ -38,6 +41,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getAdmin() {
+        return is_Admin;
+    }
+
+    public void setAdmin(int admin) {
+        is_Admin = admin;
     }
 
     @Override

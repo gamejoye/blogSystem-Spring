@@ -18,13 +18,21 @@ public class UserService {
     SqlSessionFactoryUtil sqlSessionFactoryUtil = new SqlSessionFactoryUtil();
     SqlSessionFactory sqlSessionFactory = sqlSessionFactoryUtil.sqlSessionFactoryGet();
 
-    public List<User> selectAll(){
+    public List<User> selectByLevel(int level){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
+        List<User> users = UsersMapper.selectByLevel(level);
+        sqlSession.close();
+        return users;
+    }
+
+    public User selectOne(String name){
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
-        users = UsersMapper.selectAll();
+        User user = UsersMapper.selectOne(name);
         sqlSession.close();
-        return users;
+        return user;
     }
 
     public boolean login(String name ,String password){

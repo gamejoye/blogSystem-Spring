@@ -35,10 +35,15 @@ public class function {
             return "failed";
         } else {
             //存在用户，存储用户名到cookie并跳转
+            User user = userService.selectOne(username);
             Cookie usernameCookie = new Cookie("username",username);
+            Cookie isAdCookie = new Cookie("isAd",String.valueOf(user.getAdmin()));
+            isAdCookie.setMaxAge(60*60);
+            isAdCookie.setPath("/");
             usernameCookie.setMaxAge(60*60);
             usernameCookie.setPath("/");
             response.addCookie(usernameCookie);
+            response.addCookie(isAdCookie);
             return "success";
         }
     }
