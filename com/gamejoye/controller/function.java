@@ -34,17 +34,9 @@ public class function {
             //不在用户，跳转回到登陆页面
             return "failed";
         } else {
-            //存在用户，存储用户名到cookie并跳转
+            //存在用户
             User user = userService.selectOne(username);
-            Cookie usernameCookie = new Cookie("username",username);
-            Cookie isAdCookie = new Cookie("isAd",String.valueOf(user.getAdmin()));
-            isAdCookie.setMaxAge(60*60);
-            isAdCookie.setPath("/");
-            usernameCookie.setMaxAge(60*60);
-            usernameCookie.setPath("/");
-            response.addCookie(usernameCookie);
-            response.addCookie(isAdCookie);
-            return "success";
+            return user.getName();
         }
     }
 
@@ -62,12 +54,7 @@ public class function {
             return "failed";
         } else {
             //不存在用户，可以注册
-            //1。添加cookie
-            Cookie usernameCookie = new Cookie("username",username);
-            usernameCookie.setMaxAge(60*60);
-            usernameCookie.setPath("/");
-            response.addCookie(usernameCookie);
-            //2。将用户添加进数据库
+            //将用户添加进数据库
             userService.add(new User(username,password));
             return "success";
         }
