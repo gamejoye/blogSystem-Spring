@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("users")
 @Controller
 public class selectUser {
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true")
     @RequestMapping(value="/level")
     @ResponseBody
     public String selectUserByLevel(String level, HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("blogs")
 @Controller
 public class selectBlog {
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true",maxAge = 3600)
+    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true",maxAge = 3600)
     @RequestMapping(value="/all")
     @ResponseBody
     public String selectAllBlog(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -30,7 +30,7 @@ public class selectBlog {
         return json;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true")
     @RequestMapping(value="/byName")
     @ResponseBody
     public String selectBlogByName(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -42,7 +42,7 @@ public class selectBlog {
         return json;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://112.74.55.177:3000")
     @RequestMapping(value="/article_name")
     @ResponseBody
     public String selectBlogByArticle_name(String article_name,HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -53,7 +53,7 @@ public class selectBlog {
         return json;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://112.74.55.177:3000")
     @RequestMapping(value="/add")
     @ResponseBody
     public String addBlog(@RequestBody Map<String,String> map,HttpServletRequest request, HttpServletResponse response) throws IOException {

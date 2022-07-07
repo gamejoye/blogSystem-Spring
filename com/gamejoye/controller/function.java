@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("function")
 public class function {
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", maxAge = 3600)
+    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true", maxAge = 3600)
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public String login(@RequestBody Map<String,String> map, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -36,11 +36,11 @@ public class function {
         } else {
             //存在用户
             User user = userService.selectOne(username);
-            return user.getName();
+            return  JSON.toJSONString(user);
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", maxAge = 3600)
+    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true", maxAge = 3600)
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public String register(@RequestBody Map<String,String> map, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
