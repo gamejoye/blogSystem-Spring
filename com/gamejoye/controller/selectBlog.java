@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("blogs")
 @Controller
 public class selectBlog {
-    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true",maxAge = 3600)
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true",maxAge = 3600)
     @RequestMapping(value="/all")
     @ResponseBody
     public String selectAllBlog(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -30,7 +30,7 @@ public class selectBlog {
         return json;
     }
 
-    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @RequestMapping(value="/byName")
     @ResponseBody
     public String selectBlogByName(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -42,26 +42,27 @@ public class selectBlog {
         return json;
     }
 
-    @CrossOrigin(origins = "http://112.74.55.177:3000")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @RequestMapping(value="/article_name")
     @ResponseBody
-    public String selectBlogByArticle_name(String article_name,HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String selectBlogByArticle_name(String titles,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         Service service = (Service)app.getBean("service");
-        Blog blog = service.selectByArticlename(article_name);
+        System.out.println(titles);
+        Blog blog = service.selectByArticlename(titles);
         String json = JSON.toJSONString(blog);
         return json;
     }
 
-    @CrossOrigin(origins = "http://112.74.55.177:3000")
-    @RequestMapping(value="/add")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @RequestMapping(value="/add",method = RequestMethod.POST)
     @ResponseBody
     public String addBlog(@RequestBody Map<String,String> map,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
-        String article_name = map.get("article_name");
+        String article_name = map.get("title");
         String username = map.get("username");
         String content = map.get("content");
-        int ordered = Integer.parseInt(map.get("ordered"));
+        int ordered = Integer.parseInt(map.get("order"));
         Service service = (Service)app.getBean("service");
         boolean isExist = service.selectByArticlename(article_name) != null;
         if(isExist) {
@@ -72,5 +73,4 @@ public class selectBlog {
             return "successfully added";
         }
     }
-
 }

@@ -25,6 +25,13 @@ public class Service {
         return blogs;
     }
 
+    public List<String> selectTitles(String name) {
+        List<String> titles = new ArrayList<>();
+        titles = blogInfoMapper.selectTitles(name);
+        sqlSession.close();
+        return titles;
+    }
+
     public List<Blog> selectAllbyName(String name){
         blogs = blogInfoMapper.selectAllbyname(name);
         sqlSession.close();

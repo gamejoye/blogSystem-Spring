@@ -7,7 +7,6 @@ public class User {
     int id;
     String name;
     String password;
-    int is_Admin = IsAdmin_Default;
 
     public User(){
 
@@ -43,13 +42,6 @@ public class User {
         this.password = password;
     }
 
-    public int getAdmin() {
-        return is_Admin;
-    }
-
-    public void setAdmin(int admin) {
-        is_Admin = admin;
-    }
 
     @Override
     public String toString() {

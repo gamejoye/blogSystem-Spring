@@ -2,9 +2,7 @@ package com.gamejoye.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.gamejoye.pojo.Blog;
-import com.gamejoye.pojo.User;
 import com.gamejoye.service.Service;
-import com.gamejoye.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -17,17 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@RequestMapping("users")
+@RequestMapping("titles")
 @Controller
-public class selectUser {
-    @CrossOrigin(origins = "http://112.74.55.177:3000", allowCredentials = "true")
-    @RequestMapping(value="/level")
+public class selectTitle {
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true",maxAge = 3600)
+    @RequestMapping(value="/byName")
     @ResponseBody
-    public String selectUserByLevel(String level, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String selectAllBlog(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService userService = (UserService)app.getBean("userService");
-        List<User> userList = userService.selectByLevel(Integer.parseInt(level));
-        String json = JSON.toJSONString(userList);
+        Service service = (Service)app.getBean("service");
+        List<String> titlesList = service.selectTitles(username);
+        String json = JSON.toJSONString(titlesList);
         return json;
     }
 }

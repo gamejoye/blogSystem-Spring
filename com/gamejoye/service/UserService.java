@@ -18,13 +18,6 @@ public class UserService {
     SqlSessionFactoryUtil sqlSessionFactoryUtil = new SqlSessionFactoryUtil();
     SqlSessionFactory sqlSessionFactory = sqlSessionFactoryUtil.sqlSessionFactoryGet();
 
-    public List<User> selectByLevel(int level){
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
-        List<User> users = UsersMapper.selectByLevel(level);
-        sqlSession.close();
-        return users;
-    }
 
     public User selectOne(String name){
 
