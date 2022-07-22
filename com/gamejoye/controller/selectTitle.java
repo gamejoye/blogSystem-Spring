@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class selectTitle {
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true",maxAge = 3600)
-    @RequestMapping(value="/byName")
+    @RequestMapping(value="/byName", produces="application/json;charset=UTF-8")
     @ResponseBody
     public String selectAllBlog(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");

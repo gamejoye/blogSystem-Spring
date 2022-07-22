@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 public class selectBlog {
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true",maxAge = 3600)
-    @RequestMapping(value="/all")
+    @RequestMapping(value="/all", produces="application/json;charset=UTF-8")
     @ResponseBody
     public String selectAllBlog(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -31,7 +31,7 @@ public class selectBlog {
     }
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    @RequestMapping(value="/byName")
+    @RequestMapping(value="/byName", produces="application/json;charset=UTF-8")
     @ResponseBody
     public String selectBlogByName(String username,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -39,36 +39,36 @@ public class selectBlog {
         if(username.equals("")){return "not login";}
         List<Blog> blogList = service.selectAllbyName(username);
         String json = JSON.toJSONString(blogList);
+        System.out.println("编码方式："+response.getCharacterEncoding());
         return json;
     }
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    @RequestMapping(value="/article_name")
+    @RequestMapping(value="/title", produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String selectBlogByArticle_name(String titles,HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String selectBlogBytitle(String titles,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         Service service = (Service)app.getBean("service");
-        System.out.println(titles);
         Blog blog = service.selectByArticlename(titles);
         String json = JSON.toJSONString(blog);
         return json;
     }
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    @RequestMapping(value="/add",method = RequestMethod.POST)
+    @RequestMapping(value="/add",method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String addBlog(@RequestBody Map<String,String> map,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
-        String article_name = map.get("title");
+        String title = map.get("title");
         String username = map.get("username");
         String content = map.get("content");
         int ordered = Integer.parseInt(map.get("order"));
         Service service = (Service)app.getBean("service");
-        boolean isExist = service.selectByArticlename(article_name) != null;
+        boolean isExist = service.selectByArticlename(title) != null;
         if(isExist) {
             return "This blog already exists, please change it to a new blog name";
         } else {
-            Blog blog = new Blog(article_name,username,content,ordered);
+            Blog blog = new Blog(title,username,content,ordered);
             service.add(blog);
             return "successfully added";
         }

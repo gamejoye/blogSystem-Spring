@@ -22,7 +22,7 @@ import java.util.Map;
 public class function {
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", maxAge = 3600)
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String login(@RequestBody Map<String,String> map, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         String username = map.get("username");
@@ -41,7 +41,7 @@ public class function {
     }
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", maxAge = 3600)
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String register(@RequestBody Map<String,String> map, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         String username = map.get("username");

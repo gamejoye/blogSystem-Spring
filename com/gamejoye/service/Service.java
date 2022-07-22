@@ -40,13 +40,14 @@ public class Service {
 
     public void add(Blog blog){
         blogInfoMapper.add(blog);
+        System.out.println(blog);
         sqlSession.commit();
         sqlSession.close();
     }
 
-    public Blog selectByArticlename(String article_name){
+    public Blog selectByArticlename(String title){
         Blog blog = null;
-        blog = blogInfoMapper.selectByArticlename(article_name);
+        blog = blogInfoMapper.selectByArticlename(title);
         return blog;
     }
 

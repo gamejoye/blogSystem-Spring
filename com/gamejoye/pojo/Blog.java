@@ -3,7 +3,7 @@ package com.gamejoye.pojo;
 public class Blog {
 
     int id;
-    String article_name;
+    String title;
     String username;
     String content;
     int ordered;
@@ -12,8 +12,8 @@ public class Blog {
 
     }
 
-    public Blog(String article_name,String username,String content,int ordered){
-        this.article_name = article_name;
+    public Blog(String title,String username,String content,int ordered){
+        this.title = title;
         this.username = username;
         this.content = content;
         this.ordered = ordered;
@@ -28,12 +28,12 @@ public class Blog {
         this.id = id;
     }
 
-    public String getArticle_name() {
-        return article_name;
+    public String gettitle() {
+        return title;
     }
 
-    public void setArticle_name(String article_name) {
-        this.article_name = article_name;
+    public void settitle(String title) {
+        this.title = title;
     }
 
     public String getUsername() {
@@ -64,7 +64,7 @@ public class Blog {
     public String toString() {
         return "BlogInfo{" +
                 "id=" + id +
-                ", article_name='" + article_name + '\'' +
+                ", title='" + title + '\'' +
                 ", username='" + username + '\'' +
                 ", content='" + content + '\'' +
                 ", ordered=" + ordered +
