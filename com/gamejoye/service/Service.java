@@ -62,4 +62,5 @@ public class Service {
         sqlSession.commit();
         sqlSession.close();
     }
+
 }

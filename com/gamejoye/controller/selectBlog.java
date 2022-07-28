@@ -39,7 +39,6 @@ public class selectBlog {
         if(username.equals("")){return "not login";}
         List<Blog> blogList = service.selectAllbyName(username);
         String json = JSON.toJSONString(blogList);
-        System.out.println("编码方式："+response.getCharacterEncoding());
         return json;
     }
 

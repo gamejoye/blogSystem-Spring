@@ -54,4 +54,19 @@ public class UserService {
         sqlSession.commit();
         sqlSession.close();
     }
+
+    public void setAboutMe(String aboueMe,String username) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UsersMapper usersfoMapper = sqlSession.getMapper(UsersMapper.class);
+        usersfoMapper.setAboutMe(aboueMe,username);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    public String getAboutme(String username) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UsersMapper usersfoMapper = sqlSession.getMapper(UsersMapper.class);
+        String aboutMe = usersfoMapper.getAboutMe(username);
+        return aboutMe;
+    }
 }
