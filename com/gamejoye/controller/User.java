@@ -3,7 +3,9 @@ package com.gamejoye.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.gamejoye.pojo.Blog;
+import com.gamejoye.pojo.UInfo;
 import com.gamejoye.service.Service;
+import com.gamejoye.service.UInfoService;
 import com.gamejoye.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.context.ApplicationContext;
@@ -23,11 +25,11 @@ public class User {
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @RequestMapping(value = "/introduction", produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String selectIntroduction(String username, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public UInfo selectIntroduction(String username, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService service = (UserService)app.getBean("userService");
-        String aboutMe = service.getAboutme(username);
-        return aboutMe;
+        UInfoService service = (UInfoService)app.getBean("uinfoService");
+        UInfo uInfo = service.getInfo(username);
+        return uInfo;
     }
 
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
@@ -35,12 +37,23 @@ public class User {
     @ResponseBody
     public String updateIntroduction(@RequestBody Map<String,String> map,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService service = (UserService)app.getBean("userService");
+        UInfoService service = (UInfoService)app.getBean("uinfoService");
         String username = map.get("username");
         String aboutMe = map.get("aboutMe");
-        System.out.println(username);
-        System.out.println(aboutMe);
-        service.setAboutMe(aboutMe,username);
+        String sex = map.get("sex");
+        String address = map.get("addresss");
+        String birthday = map.get("birthday");
+        if(aboutMe != null) {
+            service.setAboutMe(aboutMe,username);
+        } else if(sex != null) {
+            service.setSex(sex,username);
+        } else if(address != null) {
+            service.setAddress(address,username);
+        } else if(birthday != null) {
+            service.setBirthday(birthday,username);
+        } else {
+            return "更改字段不存在...";
+        }
         return "true";
     }
 }

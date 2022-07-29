@@ -4,7 +4,7 @@ public class Blog {
 
     int id;
     String title;
-    String username;
+    String name;
     String content;
     int ordered;
 
@@ -12,9 +12,9 @@ public class Blog {
 
     }
 
-    public Blog(String title,String username,String content,int ordered){
+    public Blog(String title,String name,String content,int ordered){
         this.title = title;
-        this.username = username;
+        this.name = name;
         this.content = content;
         this.ordered = ordered;
     }
@@ -37,11 +37,11 @@ public class Blog {
     }
 
     public String getUsername() {
-        return username;
+        return name;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.name = username;
     }
 
     public String getContent() {
@@ -65,7 +65,7 @@ public class Blog {
         return "BlogInfo{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", username='" + username + '\'' +
+                ", username='" + name + '\'' +
                 ", content='" + content + '\'' +
                 ", ordered=" + ordered +
                 '}';

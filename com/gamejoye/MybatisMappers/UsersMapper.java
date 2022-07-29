@@ -13,6 +13,4 @@ public interface UsersMapper {
     void update(User user);
     void delete(String name);
     User register(String name);
-    void setAboutMe(@Param("aboutMe") String aboueMe,@Param("name") String name);
-    String getAboutMe(String name);
 }

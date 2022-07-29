@@ -17,12 +17,11 @@ public class UserService {
     public List<User> users = new ArrayList<>();
     SqlSessionFactoryUtil sqlSessionFactoryUtil = new SqlSessionFactoryUtil();
     SqlSessionFactory sqlSessionFactory = sqlSessionFactoryUtil.sqlSessionFactoryGet();
-
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
 
     public User selectOne(String name){
 
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
         User user = UsersMapper.selectOne(name);
         sqlSession.close();
         return user;
@@ -30,17 +29,12 @@ public class UserService {
 
     public boolean login(String name ,String password){
 
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
         User u = UsersMapper.login(name,password);
         return  !(u==null);
 
     }
 
     public boolean register(String name){
-
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper UsersMapper = sqlSession.getMapper(UsersMapper.class);
         User u = new User();
         u = UsersMapper.register(name);
         return  !(u==null);
@@ -48,25 +42,9 @@ public class UserService {
 
     public void add(User user){
 
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper usersfoMapper = sqlSession.getMapper(UsersMapper.class);
-        usersfoMapper.add(user);
+        UsersMapper.add(user);
         sqlSession.commit();
         sqlSession.close();
     }
 
-    public void setAboutMe(String aboueMe,String username) {
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper usersfoMapper = sqlSession.getMapper(UsersMapper.class);
-        usersfoMapper.setAboutMe(aboueMe,username);
-        sqlSession.commit();
-        sqlSession.close();
-    }
-
-    public String getAboutme(String username) {
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UsersMapper usersfoMapper = sqlSession.getMapper(UsersMapper.class);
-        String aboutMe = usersfoMapper.getAboutMe(username);
-        return aboutMe;
-    }
 }

@@ -48,6 +48,7 @@ public class Service {
     public Blog selectByArticlename(String title){
         Blog blog = null;
         blog = blogInfoMapper.selectByArticlename(title);
+        sqlSession.close();
         return blog;
     }
 
