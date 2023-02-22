@@ -7,12 +7,15 @@ import com.gamejoye.constant.URLConstants;
 import com.gamejoye.pojo.UserInformation;
 import com.gamejoye.service.UserInformationService;
 import com.gamejoye.service.UserPrivacyService;
+import com.gamejoye.util.FileUtils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -83,5 +86,17 @@ public class UserController {
             e.printStackTrace();
         }
         return res;
+    }
+
+    @RequestMapping(value = "/image", method = RequestMethod.POST)
+    @CrossOrigin(origins = {URLConstants.BLOG_ADMIN_URL}, allowCredentials = "true")
+    @ResponseBody
+    public String uploadImage(MultipartHttpServletRequest request) {
+        String name = request.getParameterMap().get("name")[0];
+        Map<String, String> accessPaths = FileUtils.uploadFiles(request.getFileMap());
+        String avatarUrl = "";
+        for(String accessPath: accessPaths.values()) avatarUrl = accessPath;
+        userInformationService.updateAvatarUrl(name, avatarUrl);
+        return avatarUrl;
     }
 }

@@ -19,16 +19,11 @@ public class UserInformationService {
         return info;
     }
 
-    public void addU_Info(String name) {
-        userInformationMapper.add(name);
-    }
-
-    public String getAboutMe(String name) {
-        String aboutMe = userInformationMapper.getAboutMe(name);
-        return aboutMe;
-    }
-
     public void updateUserInfo(UserInformation userInformation) {
         userInformationMapper.update(userInformation);
+    }
+
+    public void updateAvatarUrl(String name, String avatarUrl) {
+        userInformationMapper.updateAvatar(name, avatarUrl);
     }
 }

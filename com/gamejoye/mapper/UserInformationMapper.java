@@ -10,4 +10,6 @@ public interface UserInformationMapper {
     String getAboutMe(String name);
     void add(@Param("name") String name);
     void update(UserInformation userInformation);
+
+    void updateAvatar(@Param("name") String name, @Param("avatarUrl") String avatarUrl);
 }
