@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public interface CommentMapper {
-    List<Comment> getAllComments(@Param("name")String name, @Param("blogId")int blogId);
+    List<Comment> getAllComments(@Param("blogId")int blogId);
     void commitComment(Comment comment);
     void deleteComment(int commentId);
 }

@@ -15,8 +15,8 @@ public class CommentService {
 
     @Autowired
     CommentMapper commentMapper;
-    public List<Comment> getAllComments(String name,int blogId) {
-        List<Comment> comments = commentMapper.getAllComments(name,blogId);
+    public List<Comment> getAllComments(int blogId) {
+        List<Comment> comments = commentMapper.getAllComments(blogId);
         return comments;
     }
 

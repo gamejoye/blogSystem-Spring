@@ -21,8 +21,8 @@ public class CommentController {
     @RequestMapping(value="/all")
     @CrossOrigin(origins = {URLConstants.BLOG_URL, URLConstants.BLOG_ADMIN_URL}, allowCredentials = "true",maxAge = 3600)
     @ResponseBody
-    public List<Comment> getAllComments(String name, @PathVariable Integer blogId) {
-        List<Comment> comments = cs.getAllComments(name,blogId);
+    public List<Comment> getAllComments(@PathVariable Integer blogId) {
+        List<Comment> comments = cs.getAllComments(blogId);
         return comments;
     }
 
